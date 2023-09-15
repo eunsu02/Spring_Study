@@ -31,7 +31,7 @@ public class LetterEntity {
 //created_at: datetime
     @CreationTimestamp // INSERT 시 자동으로 값을 채워줌
     private LocalDateTime created_at = LocalDateTime.now();
-//box id와 m:1 연결
+//box m:1 연결
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "box_id")
     private BoxEntity box;
