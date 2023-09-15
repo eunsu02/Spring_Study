@@ -42,7 +42,7 @@ public class MemberEntity {
 
     @UpdateTimestamp // UPDATE 시 자동으로 값을 채워줌
     private LocalDateTime updated_at = LocalDateTime.now();
-    //box id와 1:1 연결
+    //box 1:1 연결
     @OneToOne(mappedBy = "member")
     private BoxEntity box;
 
