@@ -64,5 +64,5 @@ public class MemberEntity {
         this.nickname = nickname;
     }
 
-
+    //아이디 제한 추가
 }
