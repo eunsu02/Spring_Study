@@ -1,6 +1,7 @@
 package com.likelion11.springstudy.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "Letter")
 public class LetterEntity {
 //id (PK) : Long
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 //쓴 사람
     @Column(nullable = false,length = 10)
@@ -35,4 +36,10 @@ public class LetterEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "box_id")
     private BoxEntity box;
+
+    @Builder
+    public LetterEntity(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

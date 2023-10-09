@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter @Setter
+@Getter //@Setter 캡슐화. 행위를 이용해서 접근행하기 때문에 getter을 제외하고는 만들지 않는 것이 좋음. 필요할때만 가져다쓸것
 @Table(name="member")
 public class MemberEntity {
 
@@ -36,17 +36,19 @@ public class MemberEntity {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-
-    @CreationTimestamp // INSERT 시 자동으로 값을 채워줌
-    private LocalDateTime created_at = LocalDateTime.now();
-
-    @UpdateTimestamp // UPDATE 시 자동으로 값을 채워줌
-    private LocalDateTime updated_at = LocalDateTime.now();
-    //box id와 1:1 연결
-    @OneToOne(mappedBy = "member")
-    private BoxEntity box;
+//
+//    @CreationTimestamp // INSERT 시 자동으로 값을 채워줌
+//    private LocalDateTime created_at = LocalDateTime.now();
+//
+//    @UpdateTimestamp // UPDATE 시 자동으로 값을 채워줌
+//    private LocalDateTime updated_at = LocalDateTime.now();
+//    //box id와 1:1 연결
+//    @OneToOne(mappedBy = "member")
+//    private BoxEntity box; 양방향 필요할때 매핑할것
 
     private boolean is_deleted = false;
+
+    @Column(nullable = true)
     private LocalDateTime deleted_at = LocalDateTime.now().plus(30, ChronoUnit.DAYS);
 
     @Builder
@@ -56,4 +58,11 @@ public class MemberEntity {
         this.password = password;
         this.nickname = nickname;
     }
+
+    //회원 닉네임 업데이트
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+
 }
